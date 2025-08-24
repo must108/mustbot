@@ -1,10 +1,15 @@
-import { Client } from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 import { deployCommands } from "./deploy-commands";
 import { config } from "./config";
 import { commands } from "./commands";
+import { hooks } from "./hooks";
 
 const client = new Client({
-    intents: ["Guilds", "GuildMessages", "DirectMessages"],
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.DirectMessages,
+    ],
 });
 
 client.once("ready", async () => {
@@ -38,5 +43,9 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.login(config.DISCORD_TOKEN);
+
+for (const hook of Object.values(hooks)) {
+    void hook();
+}
 
 export default client;
