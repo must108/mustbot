@@ -3,6 +3,7 @@ import { deployCommands } from "./deploy-commands";
 import { config } from "./config";
 import { commands } from "./commands";
 import { hooks } from "./hooks";
+// import { setupLeetcodeCron } from "./tasks/leetcron";
 
 const client = new Client({
     intents: [
@@ -20,6 +21,8 @@ client.once("ready", async () => {
             await deployCommands({ guildId: guild.id });
         }
     }
+
+    // setupLeetcodeCron(client);
 });
 
 client.on("guildCreate", async (guild) => {

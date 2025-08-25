@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model answers {
+  answer_id   Int    @id
+  question_id Int
+  answer      String @db.VarChar(255)
+}
+
+model botusers {
+  id              Int               @id @default(autoincrement())
+  userid          String            @unique
+  name            String
+  username        String
+  leetcoderecords leetcoderecords[]
+}
+
+model fiveletter {
+  wordid Int     @id @default(autoincrement())
+  words  String? @db.VarChar(10)
+}
+
+model fourletter {
+  wordid Int     @id @default(autoincrement())
+  words  String? @db.VarChar(10)
+}
+
+model leetcoderecords {
+  id          Int      @id @default(autoincrement())
+  userid      String
+  currentdate DateTime @default(now()) @db.Date
+  botusers    botusers @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([userid, currentdate])
+}
+
+model links {
+  long_url   String?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  link_id    Int       @id @default(autoincrement())
+  short_url  String?   @unique
+}
+
+model questions {
+  question_id Int    @id
+  question    String @db.VarChar(255)
+}
+
+model sixletter {
+  wordid Int     @id @default(autoincrement())
+  words  String? @db.VarChar(10)
+}
+
+model togetherimages {
+  id         Int      @id @default(autoincrement())
+  name       String
+  key        String
+  url        String
+  size       Int
+  uploadedat DateTime @db.Timestamptz(6)
+}
