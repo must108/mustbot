@@ -9,7 +9,7 @@ export async function execute() {
     });
 
     try {
-        cron.schedule("0 10 * * *", async () => {
+        cron.schedule("0 16 * * *", async () => {
             await webhook.send({
                 content: "@everyone, do your daily Leetcode."
             });

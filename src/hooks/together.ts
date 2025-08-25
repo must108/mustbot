@@ -18,7 +18,7 @@ export async function execute() {
     const key = config.IMAGE_API_KEY;
 
     try {
-        cron.schedule("0 12 * * *", async () => {
+        cron.schedule("0 18 * * *", async () => {
             const res = await fetch(url, {
                 headers: {[header]: key}
             });
