@@ -16,6 +16,10 @@ export async function execute(interaction: CommandInteraction) {
                 value: "Pong!",
             },
             {
+                name: "/together",
+                value: "Sends a picture of us!",
+            },
+            {
                 name: "/confirmleetcode",
                 value: "Confirms your Leetcode solve for today!",
             },
